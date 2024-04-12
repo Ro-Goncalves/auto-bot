@@ -1,5 +1,5 @@
 import { Chat, Client, Message } from "whatsapp-web.js";
-import { Command } from "../command.js";
+import { Command } from "../command";
 
 export class BrianSaldarCommand extends Command {
 
