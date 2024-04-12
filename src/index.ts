@@ -6,6 +6,7 @@ import { Command } from './commands/command';
 import { Constructor } from './utils/constructor';
 
 import { BrianSaldarCommand } from './commands/saldar/brian.saldar.command';
+import { SelicCommand } from './commands/selic/selict.command';
 
 const config = {
     authStrategy: new LocalAuth(),
@@ -28,20 +29,7 @@ const client = new Client(config);
 client.on('auth_failure', console.log)
 client.on('loading_screen', console.log)
 
-// const client = new Client({
-//     authStrategy: new LocalAuth(),
-//     webVersion: '2.2409.2',
-//     webVersionCache: {
-//         type: 'remote',
-//         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2409.2.html'
-//     },
-//     puppeteer: {
-//         args: ['--no-sandbox'],
-//     }
-// });
-
-client.on('qr', (qr) => {
-    // Generate and scan this code with your phone
+client.on('qr', (qr) => {   
     console.log('QR RECEIVED', qr);
     qrcode.generate(qr, { small: true });
 });
@@ -63,7 +51,8 @@ client.on('authenticated', async () => {
 });
 
 const handlers: Constructor<Command>[] = [
-    BrianSaldarCommand
+    BrianSaldarCommand,
+    SelicCommand
 ]
 const registerCommand = (command: string, handler: Command, handlers: CommandMap) => {    
     if (handlers[command]) {
